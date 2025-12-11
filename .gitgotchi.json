@@ -1,16 +1,16 @@
 {
   "name": "GitBuddy",
   "birth_date": "2025-12-11T18:36:00.326421100Z",
-  "last_commit_date": "2025-12-11T18:50:42.888490400Z",
+  "last_commit_date": "2025-12-11T20:28:23.682641800Z",
   "stats": {
-    "xp": 70,
-    "level": 1,
+    "xp": 1950,
+    "level": 20,
     "health": 100,
     "hunger": 0,
     "status": "HAPPY"
   },
   "history": {
-    "total_commits": 3,
+    "total_commits": 231,
     "streak_days": 0
   }
 }

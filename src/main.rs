@@ -55,7 +55,7 @@ fn main() {
                     let _ = state.save();
 
                     let art = game::get_ascii_art(&state.stats);
-                    println!("{}", art.cyan());
+                    println!("{}", art);
                     println!("Name: {}", state.name.bold());
                     println!("Level: {}", state.stats.level);
                     println!("XP: {}", state.stats.xp);
@@ -85,7 +85,7 @@ fn main() {
                             println!("{} Fed GitBuddy with {} lines of code!", "Nom nom!".green(), lines);
                             
                             let art = game::get_ascii_art(&state.stats);
-                            println!("{}", art.cyan());
+                            println!("{}", art);
                             
                             println!("XP: {} (Level {})", state.stats.xp, state.stats.level);
                             println!("Status: {:?}", state.stats.status);

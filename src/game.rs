@@ -73,66 +73,91 @@ pub fn check_health(state: &mut GameState) {
      // Else keep current status (manual updates might have set it to BLOATED)
 }
 
+use colored::*;
+
+
+
 pub fn get_ascii_art(stats: &Stats) -> String {
     match stats.status {
-        Status::DEAD => r#"
-        _______
-       /       \
-      |  R.I.P  |
-      |         |
-      |_________|
-      (x_x) "System Failure..."
-"#.to_string(),
-        Status::SICK => r#"
-       _____
-      /     \
-     | ()_() |
-     | (x_x) |  <-- "Segfault?"
-     |   |   |
-      \_____/
-"#.to_string(),
-         Status::SAD => r#"
-       _____
-      /     \
-     | ()_() |
-     | (T_T) |  <-- "Git pull me out of this misery..."
-     |   |   |
-      \_____/
-"#.to_string(),
-        Status::BLOATED => r#"
-       _______
-      /       \
-     | ( O_O ) |
-     | (  _  ) |
-     |___|_|___|
-     "Oof... squash those commits!"
-"#.to_string(),
+        Status::DEAD => {
+            format!(r#"
+      .-------.
+      | R.I.P |
+      |       |
+      |_______|
+     ( x   x )  {}
+"#, "DEAD".red().bold())
+        },
+
+        Status::SICK => {
+            format!(r#"
+       ___
+     _____
+    /       \ --< ( x . x ) >
+   (  +   +  )
+    \_______/
+     {}
+"#, "SICK...".green())
+        },
+
+         Status::SAD => {
+            format!(r#"
+      ( .  . )
+       ( __ )  *sniff*
+"#)
+         },
+
+        Status::BLOATED => {
+            format!(r#"
+       .---.
+     /       \
+    |  -   -  |
+    |    -    |  <-- {}
+     \       /
+      '-----'
+"#, "Burp!".green())
+        },
+
         Status::HAPPY => {
             if stats.level == 1 {
-                r#"
-      [0101]
-     /[____]\
-     | o  o |
-     |  __  |  <-- "Hello World!"
-      \____/
-"#.to_string()
+                 format!(r#"
+       /   \
+      |     |
+      |  ?  |
+       \___/
+"#)
             } else if stats.level < 5 {
-                 r#"
-       (o_o)
-      /( _ )\
-     //  |  \\
-    ((   |   ))
-     Check( )out!
-"#.to_string()
+                 // Level 2-4: Baby (Blob)
+                 format!(r#"
+      ( ^_^ )
+       (   )  {}
+"#, "Baby Byte".cyan())
+            } else if stats.level < 10 {
+                 // Level 5-9: Teen (Dino)
+                 format!(r#"
+       __
+      / _)
+     / /
+    / (___
+   (______)  {}
+"#, "Script Kid".yellow())
+            } else if stats.level < 20 {
+                // Level 10-19: Adult (Robot)
+                format!(r#"
+      [ 0_0 ]
+     /|_____|\
+      |  |  |
+      |__|__|  {}
+"#, "Code Bot".blue().bold())
             } else {
-                r#"
-         / \_/ \
-       (  ^ . ^  )
-       /  ___  \
-      /  (   )  \
-     /___|___|___\
-    [ SUPER USER ]
-"#.to_string()
+                 // Level 20+: Ancient (Dragon)
+                 format!(r#"
+      / \__
+     (    @\___
+     /         O
+    /   (_____/
+   /_____/   U    {}
+"#, "GIT GOD".magenta().bold())
             }
         },
         _ => "???".to_string()
