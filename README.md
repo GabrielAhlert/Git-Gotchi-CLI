@@ -2,9 +2,6 @@
 
 **Git-Gotchi** is a CLI-based productivity pet that lives in your git repository. It rewards consistency and "good" commit habits while punishing neglect or bad practices.
 
-![Git-Gotchi Demo](https://placehold.co/600x200?text=Git-Gotchi+CLI) 
-*(Run the app to see the actual ASCII art!)*
-
 ## 🚀 Concept
 
 Git-Gotchi isn't just a toy; it's a **Coach**.
