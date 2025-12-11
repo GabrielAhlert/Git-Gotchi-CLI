@@ -164,6 +164,25 @@ pub fn get_ascii_art(stats: &Stats) -> String {
     }
 }
 
+pub fn get_goodbye_art() -> String {
+    format!(r#"
+       ___
+      /   \
+     |  ;  |
+     |  _  |  Goodbye friend...
+      \___/
+"#)
+}
+
+pub fn get_reborn_art() -> String {
+    format!(r#"
+       ✨
+      ( )
+     (   )  I AM REBORN!
+      / \
+"#)
+}
+
 impl Stats {
     fn happiness_boost(&mut self) {
         // Placeholder for happiness logic
