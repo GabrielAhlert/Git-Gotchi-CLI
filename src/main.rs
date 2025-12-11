@@ -83,7 +83,12 @@ fn main() {
                             }
 
                             println!("{} Fed GitBuddy with {} lines of code!", "Nom nom!".green(), lines);
+                            
+                            let art = game::get_ascii_art(&state.stats);
+                            println!("{}", art.cyan());
+                            
                             println!("XP: {} (Level {})", state.stats.xp, state.stats.level);
+                            println!("Status: {:?}", state.stats.status);
                         },
                         Err(e) => {
                             // If git fails, maybe just silently fail or warn?
