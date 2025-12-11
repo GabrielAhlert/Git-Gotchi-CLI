@@ -1,13 +1,17 @@
 use std::env;
 use std::fs;
+use std::io;
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
 use std::path::Path;
 use std::process::Command;
-use std::io;
+use std::io::Write;
 
-pub fn install_hook() -> Result<(), io::Error> {
-    let hook_path = Path::new(".git/hooks/post-commit");
+pub fn install_hook(root_path: &Path) -> Result<(), io::Error> {
+    let hook_dir = root_path.join(".git").join("hooks");
+    fs::create_dir_all(&hook_dir)?;
+    
+    let hook_path = hook_dir.join("post-commit");
     
     // Determine the command to run.
     let current_exe = env::current_exe()?;
@@ -22,15 +26,24 @@ pub fn install_hook() -> Result<(), io::Error> {
 "{}" feed
 "#, exe_path_unix);
 
-    fs::write(hook_path, script_content)?;
+    let mut file = fs::File::create(&hook_path)?;
+    file.write_all(script_content.as_bytes())?;
 
     #[cfg(unix)]
     {
-        let mut perms = fs::metadata(hook_path)?.permissions();
+        let mut perms = fs::metadata(&hook_path)?.permissions();
         perms.set_mode(0o755);
-        fs::set_permissions(hook_path, perms)?;
+        fs::set_permissions(&hook_path, perms)?;
     }
 
+    Ok(())
+}
+
+pub fn uninstall_hook(root_path: &Path) -> Result<(), io::Error> {
+    let hook_path = root_path.join(".git").join("hooks").join("post-commit");
+    if hook_path.exists() {
+        fs::remove_file(hook_path)?;
+    }
     Ok(())
 }
 

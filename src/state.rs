@@ -71,8 +71,24 @@ impl GameState {
     }
 
     pub fn save(&self) -> Result<(), io::Error> {
-        let data = serde_json::to_string_pretty(self)?;
-        fs::write(DATA_FILE, data)?;
+        let json = serde_json::to_string_pretty(self)?;
+        fs::write(DATA_FILE, json)?;
         Ok(())
+    }
+
+    pub fn reset(&mut self) {
+        self.stats = Stats {
+            xp: 0,
+            level: 1,
+            health: 100,
+            hunger: 0,
+            status: Status::HAPPY,
+        };
+        self.history = History {
+            total_commits: 0,
+            streak_days: 0,
+        };
+        self.birth_date = Utc::now();
+        self.last_commit_date = Utc::now();
     }
 }
