@@ -76,39 +76,62 @@ pub fn check_health(state: &mut GameState) {
 pub fn get_ascii_art(stats: &Stats) -> String {
     match stats.status {
         Status::DEAD => r#"
-   (X_X)
-  /|   |\  R.I.P.
+        _______
+       /       \
+      |  R.I.P  |
+      |         |
+      |_________|
+      (x_x) "System Failure..."
 "#.to_string(),
         Status::SICK => r#"
-   (x_x)
-  /|   |\  I don't feel so good...
+       _____
+      /     \
+     | ()_() |
+     | (x_x) |  <-- "Segfault?"
+     |   |   |
+      \_____/
 "#.to_string(),
          Status::SAD => r#"
-   (T_T)
-  /|   |\  Feed me code...
+       _____
+      /     \
+     | ()_() |
+     | (T_T) |  <-- "Git pull me out of this misery..."
+     |   |   |
+      \_____/
 "#.to_string(),
         Status::BLOATED => r#"
-   (O_O)
-  /<   >\  Too much code...
+       _______
+      /       \
+     | ( O_O ) |
+     | (  _  ) |
+     |___|_|___|
+     "Oof... squash those commits!"
 "#.to_string(),
         Status::HAPPY => {
             if stats.level == 1 {
                 r#"
-  .---.
- /     \
- |  ?  |
- \     /
-  '---'
+      [0101]
+     /[____]\
+     | o  o |
+     |  __  |  <-- "Hello World!"
+      \____/
 "#.to_string()
             } else if stats.level < 5 {
                  r#"
-   (o_o)
-  /|   |\
+       (o_o)
+      /( _ )\
+     //  |  \\
+    ((   |   ))
+     Check( )out!
 "#.to_string()
             } else {
                 r#"
-   [^_^]
-  /|   |\  MASTER CODER
+         / \_/ \
+       (  ^ . ^  )
+       /  ___  \
+      /  (   )  \
+     /___|___|___\
+    [ SUPER USER ]
 "#.to_string()
             }
         },
